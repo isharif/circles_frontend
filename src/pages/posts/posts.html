@@ -1,0 +1,67 @@
+<ion-header>
+<!--<ion-navbar>
+    <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addItem()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>-->
+</ion-header>
+
+<ion-content>
+  <div style="position: fixed; top: 3vh; right: 3vw; z-index: 10">
+  <button ion-fab mini (click)="addItem()"><ion-icon name="add"></ion-icon></button>
+  <button ion-fab mini (click)="toggleAnonymity()"><img src= "{{fabImagePath}}"></button>
+  </div>  
+  
+  <ion-list>
+    <ion-card *ngFor = "let item of currentItems">
+      <div [ngSwitch]="item.type">
+        <ng-container *ngSwitchCase="'picture_post'">
+          <ion-thumbnail (click)="openItem(item)" item-left>
+            <img src = "{{item.url}}">
+          </ion-thumbnail>
+          <div *ngIf = "item.title" class="post_header">{{item.title}}</div> 
+          <div class="post_footer">
+            <img class = "vertically-aligned-elements post_footer_elements" src = "../../assets/img/chat-bubble.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.comments}}</span>
+            <img class = "vertically-aligned-elements post_footer_elements" src = "../../assets/img/up-arrow.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.upvotes}}</span>
+            <img class = "vertically-aligned-elements post_footer_elements" src = "../../assets/img/down-arrow.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.downvotes}}</span>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'text_post'">
+          <div style="background-color: #118C4E; height: 60vh; width: 100vw">
+          <div style= "margin: auto; position: absolute; top: 0; left: 0; bottom: 0; right: 0;">
+          <p style = "font-family: 'Muli', sans-serif; font-size: 1.5em; margin: 40% 10vw; color: white; display: inline-block">{{item.body}}</p>
+          </div>
+          </div>
+        <div class="post_footer" style="background-color: transparent">
+            <img class = "vertically-aligned-elements post_footer_elements" src = "../../assets/img/chat-bubble.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.comments}}</span>
+            <img class = "vertically-aligned-elements post_footer_elements" src = "../../assets/img/up-arrow.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.upvotes}}</span>
+            <img class = "vertically-aligned-elements post_footer_elements" src = "../../assets/img/down-arrow.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.downvotes}}</span>
+        </div>
+        </ng-container>
+        <img *ngSwitchDefault src = "{{item.url}}">
+      </div> 
+    </ion-card> 
+  </ion-list>
+  <!--<ion-list>
+    <ion-item-sliding *ngFor="let item of currentItems">
+      <button ion-item (click)="openItem(item)">
+        <ion-avatar item-start>
+          <img [src]="item.profilePic" />
+        </ion-avatar>
+        <h2>{{item.name}}</h2>
+        <p>{{item.about}}</p>
+        <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
+      </button>
+
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteItem(item)">
+          {{ 'DELETE_BUTTON' | translate }}
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list> -->
+</ion-content>

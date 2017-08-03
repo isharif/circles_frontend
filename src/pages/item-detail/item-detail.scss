@@ -1,0 +1,76 @@
+page-item-detail {
+  .item-profile {
+    width: 100%;
+    background-position: center center;
+    background-size: cover;
+    height: 250px;
+  }
+
+  .item-detail {
+    width: 100%;
+    background: white;
+    position: absolute;
+  }
+
+  .post-image-detail{
+    width: 100vw;
+  }
+
+  ion-item{
+    width: auto !important
+  }
+
+  ul{
+    padding-left: 4vw;
+    list-style-type: none
+  }
+
+  .card-md {
+    padding: 1vw;
+    margin: 1vw;
+    width: auto !important
+  }
+
+    .post_header {
+    position: absolute;
+    top: 0%;
+    font-size: 1.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1;
+    padding: 0.4em;
+    font-family: 'Muli', sans-serif;
+    }
+
+  .post_footer {
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    font-size: 1.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1;
+    padding: 0.4em;
+    font-family: 'Muli', sans-serif;
+    }
+
+  .post_footer_elements {
+    display: inline-block;
+    z-index: 3;
+    margin: 0;
+    height: 3vh;
+    width: 5vw;
+    }
+
+  .vertically-aligned-elements {
+    z-index: 3;
+    display:inline-block;
+    vertical-align:middle;
+    margin-right: 0.5vw;
+    font-family: 'Marvel', sans-serif;
+  }
+}

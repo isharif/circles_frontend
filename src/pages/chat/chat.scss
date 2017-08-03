@@ -1,0 +1,10 @@
+.scroll-bar-indicator
+{
+	display: none;
+    visibility: hidden;
+}
+
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+}
