@@ -6,7 +6,7 @@
 <ion-content>
   <div style="position: relative">
     <img id = "this" src="../../assets/img/left-arrow.png" style="height:5vh; position: absolute; margin-top: 2vh; margin-left: 2vh" (click) = "pop()">
-    <img class={post-detail-image} src={{item.url}} (click)="onCommentClick(0, 'topLevelCommentBox')">
+    <img class={post-detail-image} src={{item.url}} (click)="onCommentClick(NULL, 'topLevelCommentBox')">
     <!--<div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'"></div>-->
     <div class="post_footer" style="background-color: transparent; padding-bottom: 2vh">
       <img class = "vertically-aligned-elements post_footer_elements" src = "../../assets/img/chat-bubble.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.comments}}</span>
@@ -24,7 +24,7 @@
         <div style="border-radius:50%; overflow: hidden; display: inline-block; height:10vw; width: 10vw; position: absolute; top: 1vw" item-start>
           <img src="../../assets/img/marty-avatar.png">
         </div>
-        <div style="min-height: 11vw; padding-left: 11vw; display: inline-block" (click)="onCommentClick(comment1.commentID, index1.toString(), index1)">
+        <div style="min-height: 11vw; padding-left: 11vw; display: inline-block" (click)="onCommentClick(comment1.commentId, index1.toString(), index1)">
           <div>Anon</div>
           {{comment1.body}}
         </div>
@@ -36,7 +36,7 @@
             <div style="border-radius:50%; overflow: hidden; display: inline-block; height:10vw; width: 10vw; position: absolute; top: 1vw" item-start>
               <img src="../../assets/img/batman.png">
             </div>
-            <div style="min-height: 11vw; padding-left: 11vw" (click)="onCommentClick(comment1.children[index2].commentID, index1.toString() + index2.toString(), index1, index2)">
+            <div style="min-height: 11vw; padding-left: 11vw" (click)="onCommentClick(comment1.children[index2].commentId, index1.toString() + index2.toString(), index1, index2)">
               <div>Anon</div>
               {{comment2.body}}
             </div>
@@ -48,7 +48,7 @@
                 <div style="border-radius:50%; overflow: hidden; display: inline-block; height:10vw; width: 10vw; position: absolute; top: 1vw" item-start>
                   <img src="../../assets/img/marty-avatar.png">
                 </div>
-                <div style="min-height: 11vw; padding-left: 11vw" (click)="onCommentClick(comment1.children[index2].commentID, index1.toString() + index2.toString() + index3.toString(), index1, index2, index3)">
+                <div style="min-height: 11vw; padding-left: 11vw" (click)="onCommentClick(comment1.children[index2].commentId, index1.toString() + index2.toString() + index3.toString(), index1, index2, index3)">
                   <div>Anon</div>
                   {{comment3.body}}
                 </div>
