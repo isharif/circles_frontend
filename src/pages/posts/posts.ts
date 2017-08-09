@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 
 import { ItemCreatePage } from '../item-create/item-create';
 import { ItemDetailPage } from '../item-detail/item-detail';
@@ -19,7 +19,7 @@ export class PostsPage {
   currentItems: Item[];
   fabImagePath: String;
 
-  constructor(public navCtrl: NavController, public items: Items, public appVariables: AppVariables, public modalCtrl: ModalController, private alertCtrl: AlertController, public api: Api) {
+  constructor(public navCtrl: NavController, public items: Items, public appVariables: AppVariables, public modalCtrl: ModalController, private alertCtrl: AlertController, public api: Api, private storage: Storage) {
     this.fabImagePath = appVariables.returnFabImagePath();
   }
 

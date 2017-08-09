@@ -1,3 +1,33 @@
-page-settings {
+page-account {
+    h2{
+        font-size: 0.8em !important; 
+    }
+
+    .top-background-accountpage{
+        height: 15vh;
+        background-color: #488aff;
+    }
+
+    .middle-display-area{
+        height: 10vh;
+        line-height: 13vh;
+        text-align: center
+    }
+
+    .user-image{
+        position: absolute;
+        height:12vh; 
+        width: 12vh;
+        background-color:#488aff;
+        border-radius:50%; 
+        overflow: hidden; 
+        border-style: solid; 
+        border-color: white; 
+        border-width: 0.2em;
+        top: 7vh;
+        z-index:1;
+        margin-left: -6vh;
+        left: 50%
+    }
 
 }

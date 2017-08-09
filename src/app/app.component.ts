@@ -1,11 +1,11 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core'
 import { Platform, Nav, Config, NavController, MenuController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { FirstRunPage } from '../pages/pages';
 import { PostsPage } from '../pages/posts/posts';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
@@ -21,14 +21,14 @@ import { Settings } from '../providers/providers';
 import { AppVariables} from '../pages/app-variables';
 
 @Component({
-  selector: 'plage-app-component',
-  template: `<ion-menu [content]="content">
+  selector: 'page-app-component',
+  template:`<ion-menu [content]="content">
 
     <ion-content>
 
       <ion-item color="primary" class = "main-menu" style="text-align: center">
-        <div style="height:10vh; background-color: #fff; display: inline-block; border-radius:50%; overflow: hidden; border-style: solid; border-color: white; border-width: 0.2em">
-        <img src="{{profileImagePath}}" style="height:100%">
+        <div style="height:10vh; background-color: #488aff; display: inline-block; border-radius:50%; overflow: hidden; border-style: solid; border-color: white; border-width: 0.2em">
+        <img src="{{this.profileImagePath}}" style="height:100%">
         </div>
         <p>Imran Sharif Rizvi</p>
       </ion-item>
@@ -89,22 +89,46 @@ import { AppVariables} from '../pages/app-variables';
   <ion-nav #content [root]="rootPage" main name="app"></ion-nav>`
 })
 export class MyApp {
-  rootPage = FirstRunPage;
+  //rootPage = AppVariables.firstRunPage;
+  rootPage: any;
   ChatPage = ChatPage;
   ItemCreatePage = ItemCreatePage;
   AccountPage = AccountPage;
   TabsPage = TabsPage;
-  profileImagePath: String = "../assets/img/batman_blue.png";
   LoginPage = LoginPage;
+
+  profileImagePath: String = "../assets/img/batman_blue.png";
   loggedIn: boolean;
   subscription: any;
 
   @ViewChild(Nav) nav: Nav;
 
-  constructor(private translate: TranslateService, private platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen, public menu: MenuController, private ref:ChangeDetectorRef, private appVariables: AppVariables) {
+  constructor(private translate: TranslateService, private platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen, public menu: MenuController, private ref:ChangeDetectorRef, private appVariables: AppVariables, private storage: Storage) {
     this.initTranslate();
     this.loggedIn = AppVariables.status.loggedIn;
-    this.profileImagePath = AppVariables.accountInfo.profileImagePath;
+    this.profileImagePath = appVariables.returnProfileImagePath();
+    this.storage.get('hasSeenTutorial')
+      .then((hasSeenTutorial) => {
+        if (hasSeenTutorial) {
+        this.storage.get('loggedIn')
+          .then((val) => 
+          {
+            if (val)
+            {
+              this.rootPage = TabsPage;
+              console.log(val)
+            }
+            else
+            {
+              this.rootPage = WelcomePage;
+              console.log(val)
+            }
+          });
+        } else {
+          this.rootPage = TutorialPage;
+        }
+      });
+
     this.subscription = AppVariables.statusSubject.subscribe((value) => 
     { 
       this.loggedIn = value.loggedIn;
@@ -114,8 +138,7 @@ export class MyApp {
 
   ionViewWillEnter() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+      //the platform is ready plugins are available.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

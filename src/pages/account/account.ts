@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 import { Settings } from '../../providers/settings';
-
-import { TranslateService } from '@ngx-translate/core';
+import { AppVariables } from '../../pages/app-variables';
+import { Items } from '../../providers/providers';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -15,12 +16,11 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'page-account',
   templateUrl: 'account.html'
 })
+
 export class AccountPage {
   // Our local settings object
   options: any;
-
   settingsReady = false;
-
   form: FormGroup;
 
   profileSettings = {
@@ -31,6 +31,11 @@ export class AccountPage {
   page: string = 'main';
   pageTitleKey: string = 'SETTINGS_TITLE';
   pageTitle: string;
+  profileImagePath: String = "../assets/img/batman_blue.png";
+  userPosts: any = [];
+  
+  accountSegment: String = "posts";
+
 
   subSettings: any = AccountPage;
 
@@ -38,7 +43,15 @@ export class AccountPage {
     public settings: Settings,
     public formBuilder: FormBuilder,
     public navParams: NavParams,
-    public translate: TranslateService) {
+    public translate: TranslateService,
+    public appVariables: AppVariables, public items: Items
+    ) {
+    this.profileImagePath = appVariables.returnProfileImagePath();
+    this.userPosts = this.items.query();
+    console.log("this is the items array in my account.ts: " + JSON.stringify(this.userPosts));
+    this.userPosts = this.userPosts.filter(item => item.submitter == AppVariables.accountInfo.userId);
+    console.log("this is the items array in my account.ts: " + JSON.stringify(this.userPosts));
+    console.log("the current userId is: " + AppVariables.accountInfo.userId)
   }
 
   _buildForm() {
@@ -67,7 +80,8 @@ export class AccountPage {
 
   ionViewDidLoad() {
     // Build an empty form for the template to render
-    this.form = this.formBuilder.group({});
+    //this.form = this.formBuilder.group({});
+
   }
 
   ionViewWillEnter() {

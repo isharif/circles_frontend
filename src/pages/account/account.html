@@ -1,12 +1,99 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{ pageTitle }}</ion-title>
-  </ion-navbar>
-
 </ion-header>
+ 
+<ion-content style="position:relative"> 
 
-<ion-content>
+<div class="top-background-accountpage"></div>
+<div class="middle-display-area">
+  <span style="margin:auto; color:#488aff; vertical-align: middle">Imran Sharif Rizvi</span>
+</div>
+<div style="width:100%">
+<div class="user-image">
+  <img src="{{this.profileImagePath}}" style="margin:auto; height:100%">
+</div>
+</div>
+<ion-toolbar transparent>
+  <ion-segment color="primary" [(ngModel)]="accountSegment">
+    <ion-segment-button value="posts">
+      POSTS
+    </ion-segment-button>
+    <ion-segment-button value="comments">
+      COMMENTS
+    </ion-segment-button>
+    <ion-segment-button value="about">
+      ABOUT
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
+
+<div [ngSwitch]="accountSegment">
+  <div>
+    <ion-list *ngSwitchCase="'posts'">
+      <ion-item *ngFor = "let item of userPosts">
+        <ion-thumbnail item-start style>
+              <img src = "{{item.url || 'assets/img/text.png'}}">
+            </ion-thumbnail>
+            <h2>{{item.title}}</h2>
+            <h3>{{AppVariables.accountInfo.name}}</h3>
+      </ion-item> 
+    </ion-list>
+  </div>
+
+  <ion-list *ngSwitchCase="'comments'">
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img src="assets/img/thumbnail-kitten-1.jpg">
+      </ion-thumbnail>
+      <h2>Luna</h2>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img src="assets/img/thumbnail-kitten-3.jpg">
+      </ion-thumbnail>
+      <h2>Milo</h2>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img src="assets/img/thumbnail-kitten-4.jpg">
+      </ion-thumbnail>
+      <h2>Bandit</h2>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img src="assets/img/thumbnail-kitten-2.jpg">
+      </ion-thumbnail>
+      <h2>Nala</h2>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'about'">
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img src="assets/img/thumbnail-duckling-1.jpg">
+      </ion-thumbnail>
+      <h2>Daffy</h2>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img src="assets/img/thumbnail-duckling-2.jpg">
+      </ion-thumbnail>
+      <h2>Huey</h2>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img src="assets/img/thumbnail-duckling-3.jpg">
+      </ion-thumbnail>
+      <h2>Dewey</h2>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img src="assets/img/thumbnail-duckling-4.jpg">
+      </ion-thumbnail>
+      <h2>Louie</h2>
+    </ion-item>
+  </ion-list>
+</div>
 
 <!--  <form [formGroup]="form" *ngIf="settingsReady">
     <ion-list *ngIf="page == 'main'">

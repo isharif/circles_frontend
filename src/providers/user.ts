@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Api } from './api';
+import { Storage } from '@ionic/storage';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
@@ -11,7 +13,7 @@ export class User {
   _user: any;
 
 
-  constructor(public http: Http, public api: Api) {
+  constructor(public http: Http, public api: Api, private storage: Storage) {
   }
 
   /**
@@ -78,10 +80,11 @@ export class User {
    * Process a login/signup response to store user data
    */
   _loggedIn(resp) {
-    //this._user = resp.user;
     AppVariables.statusSubject.next({loggedIn: true});
     AppVariables.accountInfoSubject.next({userId: resp.Message[0].user_id});
-    console.log("successfully logged in:" + JSON.stringify(resp.Message));
+    this.storage.set('loggedIn', true);
+    this.storage.set('userId', resp.Message[0].user_id);
+    console.log("successfully logged in:loggedIn():user.ts" + JSON.stringify(resp.Message));
     console.log("status: " + AppVariables.status.loggedIn.valueOf());
     console.log("userId: " + AppVariables.accountInfo.userId.valueOf());
   }

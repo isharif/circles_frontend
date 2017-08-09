@@ -25222,6 +25222,37 @@ ion-navbar.toolbar {
         max-height: 100vh;
     }
 }*/
+page-account h2 {
+  font-size: 0.8em !important;
+}
+
+page-account .top-background-accountpage {
+  height: 15vh;
+  background-color: #488aff;
+}
+
+page-account .middle-display-area {
+  height: 10vh;
+  line-height: 13vh;
+  text-align: center;
+}
+
+page-account .user-image {
+  position: absolute;
+  height: 12vh;
+  width: 12vh;
+  background-color: #488aff;
+  border-radius: 50%;
+  overflow: hidden;
+  border-style: solid;
+  border-color: white;
+  border-width: 0.2em;
+  top: 7vh;
+  z-index: 1;
+  margin-left: -6vh;
+  left: 50%;
+}
+
 .scroll-bar-indicator {
   display: none;
   visibility: hidden;
@@ -25499,7 +25530,7 @@ page-welcome .splash-intro {
 }
 
 page-welcome button.login {
-  margin-top: 3vh;
+  margin-top: 2vh;
   background-color: #f8f8f8;
   -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
@@ -25514,7 +25545,7 @@ page-welcome button.login.activated {
 }
 
 page-welcome button.signup {
-  margin-top: 3vh;
+  margin-top: 2vh;
   width: 70vw;
   margin-left: auto;
   margin-right: auto;

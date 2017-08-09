@@ -47,7 +47,7 @@ export class LoginPage {
       }
       else 
       {
-        console.log("Failue:doLogin():login.ts\n" + JSON.stringify(resp.Message));
+        console.log("Failure:doLogin():login.ts\n" + JSON.stringify(resp.Message));
         this.navCtrl.push(MainPage);
         let toast = this.toastCtrl.create({
           message: "You could not be logged in. Please try again with correct credentials",
