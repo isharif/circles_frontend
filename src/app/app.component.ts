@@ -116,12 +116,12 @@ export class MyApp {
             if (val)
             {
               this.rootPage = TabsPage;
-              console.log(val)
+              console.log("this is the value of loggedIn in local storage: " + val)
             }
             else
             {
               this.rootPage = WelcomePage;
-              console.log(val)
+              console.log("this is the value of loggedIn in local storage: " + val)
             }
           });
         } else {
