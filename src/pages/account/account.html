@@ -2,8 +2,6 @@
 
 </ion-header>
  
-<ion-content style="position:relative"> 
-
 <div class="top-background-accountpage"></div>
 <div class="middle-display-area">
   <span style="margin:auto; color:#488aff; vertical-align: middle">Imran Sharif Rizvi</span>
@@ -27,72 +25,34 @@
   </ion-segment>
 </ion-toolbar>
 
+<ion-content style="position:relative"> 
+
 <div [ngSwitch]="accountSegment">
-  <div>
-    <ion-list *ngSwitchCase="'posts'">
-      <ion-item *ngFor = "let item of userPosts">
-        <ion-thumbnail item-start style>
-              <img src = "{{item.url || 'assets/img/text.png'}}">
-            </ion-thumbnail>
-            <h2>{{item.title}}</h2>
-            <h3>{{AppVariables.accountInfo.name}}</h3>
-      </ion-item> 
-    </ion-list>
-  </div>
+  <ion-list *ngSwitchCase="'posts'">
+    <ion-item *ngFor = "let post of userPosts" (click)="openItem(post)">
+      <ion-thumbnail item-start style>
+            <img src = "{{post.url || 'assets/img/text.png'}}">
+          </ion-thumbnail>
+          <h2>{{post.title}}</h2>
+          <h3>{{AppVariables.accountInfo.name}}</h3>
+    </ion-item> 
+  </ion-list>
+
 
   <ion-list *ngSwitchCase="'comments'">
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/img/thumbnail-kitten-1.jpg">
-      </ion-thumbnail>
-      <h2>Luna</h2>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/img/thumbnail-kitten-3.jpg">
-      </ion-thumbnail>
-      <h2>Milo</h2>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/img/thumbnail-kitten-4.jpg">
-      </ion-thumbnail>
-      <h2>Bandit</h2>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/img/thumbnail-kitten-2.jpg">
-      </ion-thumbnail>
-      <h2>Nala</h2>
-    </ion-item>
+    <ion-item *ngFor = "let comment of userComments">
+      <ion-avatar item-start>
+            <img src = "{{appVariables.returnProfileImagePath()}}" style="background-color: #488aff">
+          </ion-avatar>
+          <h2>{{comment.body}}</h2>
+          <h3>{{this.formatDate(comment.submitted)}}</h3>
+    </ion-item> 
   </ion-list>
 
-  <ion-list *ngSwitchCase="'about'">
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/img/thumbnail-duckling-1.jpg">
-      </ion-thumbnail>
-      <h2>Daffy</h2>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/img/thumbnail-duckling-2.jpg">
-      </ion-thumbnail>
-      <h2>Huey</h2>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/img/thumbnail-duckling-3.jpg">
-      </ion-thumbnail>
-      <h2>Dewey</h2>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="assets/img/thumbnail-duckling-4.jpg">
-      </ion-thumbnail>
-      <h2>Louie</h2>
-    </ion-item>
-  </ion-list>
+  <div *ngSwitchCase="'about'" style="height: calc(100vh - 15vh - 17rem); position: relative">
+    <div style="display:inline-block; width:49vw; margin: 1vw 0 0 0; padding: 2vw">something</div>
+    <div style="display:inline-block; width: 49vw; border-left: medium solid #488aff; margin: 1vw 0 0 0; padding: 2vw">something more</div>
+  </div>
 </div>
 
 <!--  <form [formGroup]="form" *ngIf="settingsReady">

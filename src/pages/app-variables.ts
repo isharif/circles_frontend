@@ -20,7 +20,7 @@ interface AccountInfo {
 export class AppVariables {
 
     public static status: Status = {loggedIn: false, anonymous: false}
-    public static accountInfo: AccountInfo = {userId: null, profileImagePath: "46.101.242.198:3000/profile-images/" + AppVariables.accountInfo.userId + ".jpg", name: "Imran Sharif Rizvi"}
+    public static accountInfo: AccountInfo = {userId: null, name: "Imran Sharif Rizvi"}
     public static userImageSet = false;
 
 
@@ -32,6 +32,8 @@ export class AppVariables {
 
     constructor(private storage: Storage) {  
         storage.get('userId').then((value) => { AppVariables.accountInfo.userId = value });
+        AppVariables.accountInfo.profileImagePath = "46.101.242.198:3000/profile-images/" + AppVariables.accountInfo.userId + ".jpg";
+
         this._statusSubscription = AppVariables.statusSubject.subscribe((value) => 
             {   
                 if (value.hasOwnProperty('loggedIn'))

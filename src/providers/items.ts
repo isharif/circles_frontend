@@ -49,7 +49,7 @@ export class Items {
           console.log("Failure:constructor():items.ts\n" + JSON.stringify(res.Message));
         }
       }, err => {
-        console.log('Failue:constructor():err received:items.ts:', JSON.stringify(err));
+        console.log('Failure:constructor():err received:items.ts:', JSON.stringify(err));
       });
   }
 
