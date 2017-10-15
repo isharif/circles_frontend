@@ -34,8 +34,7 @@
             <img src = "{{post.url || 'assets/img/text.png'}}">
           </ion-thumbnail>
           <h2>{{post.title}}</h2>
-          <h3>{{AppVariables.accountInfo.name}}</h3>
-    </ion-item> 
+     </ion-item> 
   </ion-list>
 
 
@@ -50,8 +49,20 @@
   </ion-list>
 
   <div *ngSwitchCase="'about'" style="height: calc(100vh - 15vh - 17rem); position: relative">
-    <div style="display:inline-block; width:49vw; margin: 1vw 0 0 0; padding: 2vw">something</div>
-    <div style="display:inline-block; width: 49vw; border-left: medium solid #488aff; margin: 1vw 0 0 0; padding: 2vw">something more</div>
+    <div style="display:inline-flex; width:49vw; margin: 1vw 0 0 0; padding: 2vw; height: 10vh">
+        <img src="assets/img/cake.png" style="height: 5vh">
+      <div style="display: inline-flex; flex-direction: column">
+        <h2>Cher</h2>
+        <p>Ugh. As if.</p>
+      </div>
+    </div>
+    <div style="display:inline-flex; width: 49vw; border-left: medium solid #488aff; margin: 1vw 0 0 0; padding: 2vw; height: 10vh">
+        <img src="assets/img/like.png" style="height: 5vh">
+      <div style="display: inline-flex; flex-direction: column">
+        <h2>Cher</h2>
+        <p>Ugh. As if.</p>
+      </div>
+    </div>
   </div>
 </div>
 
