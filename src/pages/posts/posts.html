@@ -16,7 +16,7 @@
   <button ion-fab mini (click)="toggleAnonymity()"><img src= "{{fabImagePath}}"></button>
   </div>  
   
-  <ion-list>
+  <ion-list (swipe)="swipeEvent($event)">
     <ion-card *ngFor = "let item of currentItems">
       <div [ngSwitch]="item.type">
         <ng-container *ngSwitchCase="'picture_post'">

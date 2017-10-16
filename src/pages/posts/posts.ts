@@ -5,11 +5,13 @@ import { Storage } from '@ionic/storage';
 
 import { ItemCreatePage } from '../item-create/item-create';
 import { ItemDetailPage } from '../item-detail/item-detail';
+import { MapPage } from '../map/map';
 
 import { Items } from '../../providers/providers';
 import { AppVariables } from '../app-variables';
 import { Item } from '../../models/item';
 import { Api } from '../../providers/providers';
+
 
 @Component({
   selector: 'page-posts',
@@ -89,6 +91,12 @@ export class PostsPage {
     this.navCtrl.push(ItemDetailPage, {
       item: item
     });
+  }
+
+  swipeEvent(e) {
+    if (e.direction == 2) {
+      this.navCtrl.push(MapPage);
+    }
   }
 
   toggleAnonymity() {

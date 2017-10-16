@@ -5,6 +5,7 @@ import { Tabs, NavController, MenuController } from 'ionic-angular';
 import { Tab1Root } from '../pages';
 import { Tab2Root } from '../pages';
 import { Tab3Root } from '../pages';
+import { MapPage } from '../map/map';
 
 @Component({
   selector: 'page-tabs',
@@ -30,6 +31,12 @@ export class TabsPage {
   ionViewDidEnter() {
     // the root left menu should be disabled on the tutorial page
     this.menu.enable(true);
+  }
+
+  swipeEvent(e) {
+    if (e.direction == 2) {
+      this.navCtrl.push(MapPage);
+    }
   }
 
   /*constructor(public navCtrl: NavController, public translateService: TranslateService) {
