@@ -95,7 +95,7 @@ export class PostsPage {
 
   swipeEvent(e) {
     if (e.direction == 2) {
-      this.navCtrl.push(MapPage);
+      this.navCtrl.parent.parent.push(MapPage);
     }
   }
 
