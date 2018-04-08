@@ -141,6 +141,7 @@ export class MyApp {
       //the platform is ready plugins are available.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.loggedIn = AppVariables.status.loggedIn;
     });
   }
 

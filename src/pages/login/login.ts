@@ -38,8 +38,8 @@ export class LoginPage {
       console.log("this is the current position" + this.account.location)
     }).catch((error) => {
       console.log('Error getting location', error);
+      this.account.location = "";
     });
-    this.account.location = "a";
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     })
