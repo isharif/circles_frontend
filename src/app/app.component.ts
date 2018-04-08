@@ -116,12 +116,14 @@ export class MyApp {
             if (val)
             {
               this.rootPage = TabsPage;
-              console.log("this is the value of loggedIn in local storage: " + val)
+              console.log("the user has seen the tutorial and is logged in this is the value of loggedIn in local storage: " + val)
+              this.loggedIn = val;
             }
             else
             {
               this.rootPage = WelcomePage;
-              console.log("this is the value of loggedIn in local storage: " + val)
+              console.log("the user has seen the tutorial and is not logged in this is the value of loggedIn in local storage: " + val)
+              this.loggedIn = val;
             }
           });
         } else {
@@ -141,6 +143,7 @@ export class MyApp {
       //the platform is ready plugins are available.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      console.log()
       this.loggedIn = AppVariables.status.loggedIn;
     });
   }

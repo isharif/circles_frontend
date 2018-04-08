@@ -31,14 +31,27 @@ export class AppVariables {
     private _statusSubscription: any;
 
     constructor(private storage: Storage) {  
-        storage.get('userId').then((value) => { AppVariables.accountInfo.userId = value });
-        AppVariables.accountInfo.profileImagePath = "46.101.242.198:3000/profile-images/" + AppVariables.accountInfo.userId + ".jpg";
+
+        storage.get('loggedIn')
+          .then((val) => 
+          {
+            if (val)
+            {
+                console.log("value of status.loggedIn in app-variables.ts has bee updated to: " + val)
+                AppVariables.status.loggedIn = val;
+                storage.get('userId').then((value) => { AppVariables.accountInfo.userId = value });
+                AppVariables.accountInfo.profileImagePath = "46.101.242.198:3000/profile-images/" + AppVariables.accountInfo.userId + ".jpg";
+            }
+            else
+            {
+                console.log("value of status.loggedIn in app-variables.ts has bee updated to: " + val)
+                AppVariables.status.loggedIn = val;
+              }
+          });
 
         this._statusSubscription = AppVariables.statusSubject.subscribe((value) => 
             {   
-                if (value.hasOwnProperty('loggedIn'))
                 AppVariables.status.loggedIn = value.loggedIn;
-                if (value.hasOwnProperty('anonymous'))
                 AppVariables.status.anonymous = value.anonymous;
                 console.log("value of status changed"+ JSON.stringify(AppVariables.status))
             }); 
