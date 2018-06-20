@@ -31,7 +31,7 @@
           </div>
         </ng-container>
         <ng-container *ngSwitchCase="'text_post'">
-          <div style="background-color: #118C4E; min-height: 70vh; width: 100vw; justify-content: center; align-items: center; display: flex">
+          <div  (click)="openItem(item)" style="background-color: #118C4E; min-height: 70vh; width: 100vw; justify-content: center; align-items: center; display: flex">
           <p style = "font-family: 'Muli', sans-serif; font-size: 1.5em; padding: 40% 10vw; color: white">{{item.body}}</p>
           </div>
         <div class="post_footer" style="background-color: transparent">

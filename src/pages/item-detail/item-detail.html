@@ -4,14 +4,27 @@
 
 
 <ion-content>
-  <div style="position: relative">
-    <img id = "this" src="../../assets/img/left-arrow.png" style="height:5vh; position: absolute; margin-top: 2vh; margin-left: 2vh" (click) = "pop()">
-    <img class={post-detail-image} src={{item.url}} (click)="onCommentClick(NULL, 'topLevelCommentBox')">
-    <!--<div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'"></div>-->
-    <div class="post_footer" style="background-color: transparent; padding-bottom: 2vh">
-      <img class = "vertically-aligned-elements post_footer_elements" src = "../../assets/img/chat-bubble.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.comments}}</span>
-      <img class = "vertically-aligned-elements post_footer_elements" src = "../../assets/img/up-arrow.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.upvotes}}</span>
-      <img class = "vertically-aligned-elements post_footer_elements" src = "../../assets/img/down-arrow.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.downvotes}}</span>
+  <div [ngSwitch]="item.type">
+    <div  *ngSwitchCase="'picture_post'" style="position: relative">
+      <img id = "this" src="../../assets/img/left-arrow.png" style="height:5vh; position: absolute; margin-top: 2vh; margin-left: 2vh" (click) = "pop()">
+      <img class={post-detail-image} src={{item.url}} (click)="onCommentClick(NULL, 'topLevelCommentBox')">
+      <!--<div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'"></div>-->
+      <div class="post_footer" style="background-color: transparent; padding-bottom: 2vh">
+        <img class = "vertically-aligned-elements post_footer_elements" (click) = "onUpVote()" src = "../../assets/img/chat-bubble.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.comments}}</span>
+        <img class = "vertically-aligned-elements post_footer_elements" src = "../../assets/img/up-arrow.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.upvotes}}</span>
+        <img class = "vertically-aligned-elements post_footer_elements" src = "../../assets/img/down-arrow.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.downvotes}}</span>
+      </div>
+    </div>
+    <div *ngSwitchCase="'text_post'" style="position: relative">
+      <img id = "this" src="../../assets/img/left-arrow.png" style="height:5vh; position: absolute; margin-top: 2vh; margin-left: 2vh" (click) = "pop()">
+      <div (click)="onCommentClick(NULL, 'topLevelCommentBox')" style="background-color: #118C4E; min-height: 70vh; width: 100vw; justify-content: center; align-items: center; display: flex">
+      <p style = "font-family: 'Muli', sans-serif; font-size: 1.5em; padding: 40% 10vw; color: white">{{item.body}}</p>
+      </div>
+      <div class="post_footer" style="background-color: transparent">
+          <img class = "vertically-aligned-elements post_footer_elements" src = "assets/img/chat-bubble.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.comments}}</span>
+          <img class = "vertically-aligned-elements post_footer_elements" src = "assets/img/up-arrow.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.upvotes}}</span>
+          <img class = "vertically-aligned-elements post_footer_elements" src = "assets/img/down-arrow.png"><span style = "margin-right: 5vw" class = "vertically-aligned-elements">{{item.downvotes}}</span>
+      </div>
     </div>
   </div>
   <ion-card *ngIf="topLevelCommentBox">  

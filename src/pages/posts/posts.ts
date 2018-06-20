@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Subject }    from 'rxjs/Subject';
 
 import { ItemCreatePage } from '../item-create/item-create';
 import { ItemDetailPage } from '../item-detail/item-detail';
@@ -18,8 +19,10 @@ import { Api } from '../../providers/providers';
   templateUrl: 'posts.html'
 })
 export class PostsPage {
-  currentItems: Item[];
+  public static currentItems: Item[];
   fabImagePath: String;
+  posts: Item[] = [];
+  public sortingOption: Subject<any> = new Subject<any>();
 
   constructor(public navCtrl: NavController, public items: Items, public appVariables: AppVariables, public modalCtrl: ModalController, private alertCtrl: AlertController, public api: Api, private storage: Storage) {
     this.fabImagePath = appVariables.returnFabImagePath();
@@ -29,7 +32,27 @@ export class PostsPage {
    * The view loaded, let's query our items for the list
    */
   ionViewDidLoad() {
-    this.currentItems = this.items.query();
+    var postsRequest = this.items.query("hot");
+    postsRequest
+    .map(res => res.json())
+    .subscribe(res => {
+      // If the API returned a successful response, parse the response
+      if (!res.Error) {
+        console.log("Success:query():posts.ts\n" + JSON.stringify(res.Message)); //remove res.Message because it will be too long and will clutter the console
+        let posts = res.Message;
+        PostsPage.currentItems = [];  //reset the posts/items array every time a new response is fetched
+        for (let item of posts) {
+           PostsPage.currentItems.push(new Item({postId: item.post_id, title: item.title, url: item.url, upvotes: item.upvotes, downvotes: item.downvotes, submitter: item.user_id, submitted: item.submitted, type: item.type, comments: item.comments, commentChain: [], anonymous: item.anonymous, body: item.body}));
+        }
+      } 
+      else 
+      {
+        console.log("Failure:query():posts.ts\n" + JSON.stringify(res.Message));
+      }
+    }, err => {
+      console.log('Failure:query():err received:posts.ts:', JSON.stringify(err));
+    });
+    console.log("this shit is the current items in posts.ts" + "\n" + PostsPage.currentItems)
   }
 
   /**
@@ -76,6 +99,11 @@ export class PostsPage {
       alert.present();
     }
   }
+
+  get currentItems() {
+    return PostsPage.currentItems;
+  }
+
 
   /**
    * Delete an item from the list of items.
